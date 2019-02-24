@@ -20,7 +20,7 @@ class vgg_preloaded(nn.Module):
 		self.use_cuda = use_cuda
 		self.num_class = num_class
 		self.dtype = torch.cuda.FloatTensor if self.use_cuda else torch.FloatTensor
-		model = models.vgg16(pretrained=True)
+		model = models.inception_v3(pretrained=True)
 		self.model = model.cuda() if self.use_cuda else model
 		for param in self.model.features.parameters():
 			param.require_grad = False
