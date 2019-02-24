@@ -1,0 +1,13 @@
+Project planninig notes for AWS assignment
+
+1. train val test split: 0.7, 0.2, 0.1.
+	using val to determine if overfitting while training
+	once determined and properly trained, merge val to train and train for one more epoch
+	use test to finally see the performance
+
+2. use sub/over sampling on the different classes to balance out the dataset.
+	we have 6 classes and the label distribution is very very dire and we do not know the natural distribution
+	see the performance first before we determine
+	I think they'll want me to iterate and decide on a proper strategy before I move forward
+
+3. 	
