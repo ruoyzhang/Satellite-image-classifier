@@ -70,9 +70,9 @@ class custom_dset(Dataset):
 
 
 def train_val_test_split(dataset, train_split, val_split, test_split):
-	"""
-	Split data set into training, validation, and test sets.
-	"""
+    """
+    Split data set into training, validation, and test sets.
+    """
     if train_split + val_split + test_split != 1:
         print('Incorrect split sizes')
     
