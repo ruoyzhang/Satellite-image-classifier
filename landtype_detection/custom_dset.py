@@ -23,12 +23,11 @@ class custom_dset(Dataset):
         # the dict contains key-value pairs of the form: full_file_dir: class
         all_files_dict = {}
         for path in sub_paths:
-            print(os.path.split(path)[1])
             all_files_dict = {**all_files_dict, **{os.path.join(path, file_name):class_dict[os.path.split(path)[1]] for file_name in os.listdir(path)}}
 
 
         # creating a list of all files and store as a class var
-        self.all_files = sorted(list(all_file_dict.keys()))
+        self.all_files = sorted(list(all_files_dict.keys()))
 
         # setting the all_file_dict to a class variable
         self.dir_to_class_dict = all_files_dict
