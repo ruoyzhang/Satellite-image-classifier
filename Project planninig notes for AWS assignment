@@ -10,4 +10,19 @@ Project planninig notes for AWS assignment
 	see the performance first before we determine
 	I think they'll want me to iterate and decide on a proper strategy before I move forward
 
-3. 	
+3. 	We decided to use the inception v3 pretrained model:
+	i. it's available on torchvision.models
+	ii. despite having lots of layers, the number of parameters are doable (in comparison with the VGGs especially)
+	We might have done this correctly, to test
+
+
+4.	might need to write a custom dataset class which takes a dictionary containing k-v pairs of sub/over sampled file names and their classes because we don't seem to be able to perform resampling during the data loading stage
+
+5.	We have A LOT of tiny images, not sure how this will fare with the weak GPU that I have
+		We can probably play around the batch size to optimse for run time
+
+6. Need to write a correct val function
+
+
+
+
