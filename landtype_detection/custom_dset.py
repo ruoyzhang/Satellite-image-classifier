@@ -13,7 +13,7 @@ from torch.optim import Adam
 import math
 
 class custom_dset(Dataset):
-    def __init__(self, data_dir, transforms=None):
+    def __init__(self, data_dir, transform=None):
         """
         data_dir : path to images folder
         label_csv : path to HAM10000_metadata.csv
