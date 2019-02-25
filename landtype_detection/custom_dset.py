@@ -40,10 +40,11 @@ class custom_dset(Dataset):
         if tranform is None:
             normalize = transforms.Normalize(mean = [0.485, 0.456, 0.406], std = [0.229, 0.224, 0.225])
             tranform = transforms.Compose([
-                transform.Resize(),
-                transform.CennterCrop(),
+                transform.Resize(299),
+                transform.CennterCrop(299),
                 transform.ColorJitter(hue = .05, saturation = .05),
                 transform.RandomHorizontalFlip(),
+                tramsform.RandomVerticalFlip(),
                 transform.RandomRotation(360, resample = Image.BILINEAR),
                 transform.ToTensor(),
                 normalize,

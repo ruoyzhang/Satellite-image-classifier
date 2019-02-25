@@ -10,6 +10,7 @@ from torchvision import models, transforms, utils
 from PIL import Image
 from tqdm import tqdm
 from torch.optim import Adam
+from torch.optim import SGD
 import math
 
 
@@ -23,12 +24,12 @@ class vgg_preloaded(nn.Module):
 		model = models.inception_v3(pretrained=True)
 		self.model = model.cuda() if self.use_cuda else model
 		for param in self.model.features.parameters():
-			param.require_grad = False
+			param.requires_grad = False
 		num_features = self.model.classifier[6].in_features
 		features = list(self.model.classifier.children())[:-1] # Remove last layer
 		features.extend([nn.Linear(num_features, self.num_class)])
 		self.model.classifier = nn.Sequential(*features)
-		self.model.classifier.require_grad = True
+		self.model.classifier.requires_grad = True
 
 	def forward(self, inp):
 		return(self.model(inp))
