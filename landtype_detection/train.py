@@ -12,6 +12,7 @@ from tqdm import tqdm
 from torch.optim import 
 from torch.optim import Adam, SGD, lr_scheduler
 import math
+from torch.utils.data import WeightedRandomSampler
 
 
 def train(data_dir, save_dir, num_class,\
