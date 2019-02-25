@@ -43,9 +43,9 @@ class custom_dset(Dataset):
         self.len = len(self.dir_to_class_dict)
         
         # setting the image transform class method
-        if tranform is None:
+        if transform is None:
             normalize = transforms.Normalize(mean = [0.485, 0.456, 0.406], std = [0.229, 0.224, 0.225])
-            tranform = transforms.Compose([
+            transform = transforms.Compose([
                 transforms.Resize(299),
                 transforms.CennterCrop(299),
                 transforms.ColorJitter(hue = .05, saturation = .05),
@@ -55,7 +55,7 @@ class custom_dset(Dataset):
                 transforms.ToTensor(),
                 normalize,
                 ])
-        self.tranform = transform
+        self.transform = transform
 
     # the __len__ method
     def __len__(self):
