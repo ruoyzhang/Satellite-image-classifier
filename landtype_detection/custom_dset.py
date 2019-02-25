@@ -50,7 +50,7 @@ class custom_dset(Dataset):
                 transforms.CenterCrop(299),
                 transforms.ColorJitter(hue = .05, saturation = .05),
                 transforms.RandomHorizontalFlip(),
-                tramsforms.RandomVerticalFlip(),
+                transforms.RandomVerticalFlip(),
                 transforms.RandomRotation(360, resample = Image.BILINEAR),
                 transforms.ToTensor(),
                 normalize,
