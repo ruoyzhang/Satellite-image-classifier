@@ -24,7 +24,7 @@ class custom_dset(Dataset):
         sub_paths = [path for path in sub_paths if os.path.isdir(path)]
 
         # creating a dict to convert string classes into integers that can be converted to tensors
-        class_dict = {'water':1, 'trees':2, 'road':3, 'barren_land': 4, 'building': 5, 'grassland':6}
+        class_dict = {'water':0, 'trees':1, 'road':2, 'barren_land': 3, 'building': 4, 'grassland':5}
 
         # creating a dict for all files stored in the different class specific folders
         # the dict contains key-value pairs of the form: full_file_dir: class
@@ -35,6 +35,9 @@ class custom_dset(Dataset):
 
         # creating a list of all files and store as a class var
         self.all_files = sorted(list(all_files_dict.keys()))
+
+        # creating a list of all classes in the order of the all_files class variable
+        self.labels = [all_files_dict[key] for key in self.all_files]
 
         # setting the all_file_dict to a class variable
         self.dir_to_class_dict = all_files_dict
