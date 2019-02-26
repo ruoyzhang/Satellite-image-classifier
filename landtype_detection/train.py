@@ -13,6 +13,7 @@ from torch.optim import
 from torch.optim import Adam, SGD, lr_scheduler
 import math
 from torch.utils.data import WeightedRandomSampler
+from collections import Counter
 
 
 def train(data_dir, save_dir, num_class,\
@@ -59,13 +60,33 @@ def train(data_dir, save_dir, num_class,\
 
 	# setting up the loss function and optimisation method
 	# we use the cross entropy for the multiclass classification task
-	# we use stochastic gradient descend for optimisation
-	# we apply learning rate decay
 	loss_fun = torch.nn.CrossEntropyLoss(reduction = 'sum')
+	# we use stochastic gradient descend for optimisation
 	optim = SGD(model.paramters(), lr = lr, momentum = 0.9)
+	# we apply learning rate decay
 	exp_lr_scheduler = lr_scheduler.StepLR(optim, step_size = 7, gamma = 0.1)
 
-	# set up the dataset and split the dataset into train, val and test
+
+	# set up the dataset
+	dataset = custom_dset(data_dir = data_dir)
+
+	# setting up a random weighted sampler to ensure the classes are balanced in the training phase
+	# calculating weights for the dset indices according to their respective class
+	class_sample_counts = Counter(dset.labels)
+	sorted_class_sample_count = [class_sample_count[key] for key in sorted(class_sample_count.keys())]
+	weights = 100000./torch.tensor(sorted_class_sample_count, dtype = torch.float)
+	samples_weights = [weights[label] for label in dset.labels]
+	# the sampler
+	sampler = WeightedRandomSampler(weights=samples_weights,
+									num_samples=len(samples_weights),
+									replacement=True)
+
+	# split the dataset into train, val and test
+	test_prop = 1 - train_prop - val_prop
+	train_data, val_data, test_data = train_val_test_split(dataset, train_prop, val_prop, test_prop)
+
+
+
 
 
 

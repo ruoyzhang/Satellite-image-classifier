@@ -54,7 +54,7 @@ class custom_dset(Dataset):
                 transforms.ColorJitter(hue = .05, saturation = .05),
                 transforms.RandomHorizontalFlip(),
                 transforms.RandomVerticalFlip(),
-                transforms.RandomRotation(360, resample = Image.BILINEAR),
+                transforms.RandomRotation(90, resample = Image.BILINEAR),
                 transforms.ToTensor(),
                 normalize,
                 ])
@@ -82,6 +82,7 @@ def train_val_test_split(dataset, train_split, val_split, test_split):
     """
     Split data set into training, validation, and test sets.
     """
+    print(train_split + val_split + test_split)
     if train_split + val_split + test_split != 1:
         print('Incorrect split sizes')
     
