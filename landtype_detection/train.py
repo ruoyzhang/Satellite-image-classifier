@@ -61,7 +61,7 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 	# we use the cross entropy for the multiclass classification task
 	loss_fun = torch.nn.CrossEntropyLoss(reduction = 'sum')
 	# we use stochastic gradient descend for optimisation
-	optim = SGD(model.paramters(), lr = lr, momentum = 0.9)
+	optim = SGD(model.parameters(), lr = lr, momentum = 0.9)
 	# we apply learning rate decay
 	exp_lr_scheduler = lr_scheduler.StepLR(optim, step_size = 7, gamma = 0.1)
 
