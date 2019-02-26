@@ -9,7 +9,6 @@ import torch.nn as nn
 from torchvision import models, transforms, utils
 from PIL import Image
 from tqdm import tqdm
-from torch.optim import 
 from torch.optim import Adam, SGD, lr_scheduler
 import math
 from torch.utils.data import WeightedRandomSampler
@@ -151,7 +150,7 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 				best_model_wts = model.state_dict()
 				torch.save(model.state_dict(). os.path.join(save_dir, '().pt'.format(name)))
 
-
+	# calculating time elapsed
 	time_elapsed = time.time() - begin
 	print('Training complete in {:.0F}m {:0F}s'.format(
 		time_elapsed // 60, time_elapsed % 60))
