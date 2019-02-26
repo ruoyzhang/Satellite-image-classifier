@@ -121,6 +121,8 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 					inputs = inputs.cuda()
 					labels = labels.cuda()
 				
+				print(inputs.shape)
+
 				# zero the parameter gradients
 				optim.zero_grad()
 
@@ -134,7 +136,7 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 				running_corrects += preds.eq(labels.view_as(preds)).sum()
 
 				# backprop and optimise if in training stage
-				if phase == 'train':				
+				if phase == 'train':
 					loss.backward()
 					optim.step()
 					size += batch_count
