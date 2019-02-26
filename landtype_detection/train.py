@@ -51,8 +51,8 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 		model = model.cuda()
 
 	# setting up the loss and accuracy variables
-	loss_record = {'train': np.zeros(epoch), 'val': np.zeros(epoch)}
-	acc_record = {'train': np.zeros(epoch), 'val': np.zeros(epoch)}
+	loss_record = {'train': np.zeros(num_epoch), 'val': np.zeros(num_epoch)}
+	acc_record = {'train': np.zeros(num_epoch), 'val': np.zeros(num_epoch)}
 
 	# setting up the loss function and optimisation method
 	# we use the cross entropy for the multiclass classification task
