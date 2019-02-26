@@ -98,7 +98,7 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 		print('-' * 10)
 
 		# each epoch will have a training and validation phase
-		for phase in ['train', 'val']:
+		for phase in ['val', 'val']:
 			if phase == 'train':
 				exp_lr_scheduler.step()
 				# setting model to trainning mode
