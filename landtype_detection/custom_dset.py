@@ -82,9 +82,6 @@ def train_val_test_split(dataset, train_split, val_split, test_split):
     """
     Split data set into training, validation, and test sets.
     """
-    print(train_split + val_split + test_split)
-    if train_split + val_split + test_split != 1:
-        print('Incorrect split sizes')
     
     # Size of data set
     N = dataset.__len__()
@@ -117,4 +114,4 @@ def train_val_test_split(dataset, train_split, val_split, test_split):
     val_data = torch.utils.data.Subset(dataset, val_ids)
     test_data = torch.utils.data.Subset(dataset, test_ids)
     
-    return train_data, val_data, test_data
+    return(train_data, val_data, test_data)
