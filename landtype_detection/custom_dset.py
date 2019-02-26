@@ -73,7 +73,7 @@ class custom_dset(Dataset):
             image = self.transform(image)
 
         label = self.dir_to_class_dict[file_name]
-        label_t = tensor.from_from_numpy(np.array(label))
+        label_t = torch.from_from_numpy(np.array(label))
         
         return (img_t, label_t)
 
