@@ -105,7 +105,7 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 				model.train()
 			else:
 				# setting model to validation mode
-				model.val()
+				model.eval()
 
 			# recording the running performance each epoch
 			running_loss = 0.0
