@@ -38,6 +38,8 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 	# checkpoint beginning time
 	begin = time.time()
 
+	# instantiate the vgg model
+	model = pretrained_inception_v3(num_class, use_cuda)
 
 	# we check if the save_dir exists, if not, we create it
 	if not os.path.isdir(save_dir):
