@@ -75,7 +75,7 @@ class custom_dset(Dataset):
         label = self.dir_to_class_dict[file_name]
         label_t = torch.from_numpy(np.array(label))
         
-        return (img_t, label_t)
+        return (image, label_t)
 
 
 def train_val_test_split(dataset, train_split, val_split, test_split):
