@@ -14,6 +14,7 @@ import math
 from torch.utils.data import WeightedRandomSampler
 from collections import Counter
 import time
+from pretrained_inceptionv3 import pretrained_inception_v3
 
 
 def train(data_dir, save_dir, num_class, num_epoch = 20,\
