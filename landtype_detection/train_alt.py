@@ -81,9 +81,9 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 	#weights = 100000./torch.tensor(sorted_train_class_sample_count, dtype = torch.float)
 	#samples_weights = [weights[label] for label in train_data.dataset.labels]
 	# the sampler
-	sampler = WeightedRandomSampler(weights=samples_weights,
-									num_samples=len(samples_weights),
-									replacement=True)
+	#sampler = WeightedRandomSampler(weights=samples_weights,
+	#								num_samples=len(samples_weights),
+	#								replacement=True)
 	# the dataloaders, we create 2 dataloaders for the train and val phase seperately
 	dataloaders = {'train': DataLoader(dset, batch_size = bs, shuffle = True, num_workers = num_workers, pin_memory = False),
 					'val': DataLoader(dset, batch_size = bs, shuffle = True, num_workers = num_workers, pin_memory = False)}
