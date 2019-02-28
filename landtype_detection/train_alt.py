@@ -165,4 +165,4 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 
 	# load the best model weights
 	model.load_state_dict(best_model_wts)
-	return(loss_record, acc_record, model, test_data)
+	return(loss_record, acc_record, model)
