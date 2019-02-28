@@ -47,7 +47,7 @@ class pretrained_inception_v3(nn.Module):
 		for param in self.model.fc.parameters():
 			param.requires_grad = True
 
-	def forward(self, input):
-		return(self.model(input))
+	def forward(self, inputs):
+		return(self.model(inputs))
 
 
