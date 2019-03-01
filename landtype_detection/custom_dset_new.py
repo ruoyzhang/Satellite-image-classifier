@@ -13,6 +13,69 @@ from torch.optim import Adam
 import math
 
 
+def train_val_test_split(data_dir, train_split, val_split, test_split):
+    """
+    Split data set into training, validation, and test sets.
+    data_dir : path to images folder
+    train_split : proportion of the data to be used for training
+    val_split : proportion of the data to be used for validation
+    test_split : proportion of the data to be used for testing
+    """
+
+    # getting the sub folders and getting rid off irrelevant readings
+    sub_paths = [os.path.join(data_dir, file_dir) for file_dir in os.listdir(data_dir)]
+    sub_paths = [path for path in sub_paths if os.path.isdir(path)]
+
+    # creating a dict to convert string classes into integers that can be converted to tensors
+    class_dict = {'water':0, 'trees':1, 'road':2, 'barren_land': 3, 'building': 4, 'grassland':5}
+
+    # creating a dict for all files stored in the different class specific folders
+    # the dict contains key-value pairs of the form: full_file_dir: class
+    all_files_dict = {}
+    for path in sub_paths:
+        all_files_dict = {**all_files_dict, **{os.path.join(path, file_name):class_dict[os.path.split(path)[1]] for file_name in os.listdir(path)}}
+
+    # now sample according to the proportions
+    # Size of data set
+    N = dataset.__len__()
+    
+    # Size of train set
+    train_size = math.floor(train_split * N)
+    
+    # Size of validation set
+    val_size = math.floor(val_split * N)
+    
+    # List of all data indices
+    indices = list(range(N))
+    
+    # Random selection of indices for train set
+    train_ids = np.random.choice(indices, size=train_size, replace=False)
+    train_ids = list(train_ids)
+    
+    # Deletion of indices used for train set
+    indices = list(set(indices) - set(train_ids))
+    
+    # Random selection of indices for validation set
+    val_ids = np.random.choice(indices, size=val_size, replace=False)
+    val_ids = list(val_ids)
+    
+    # Selecting remaining indices for test set
+    test_ids = list(set(indices) - set(val_ids))
+
+    # creating subsets in the forms of dictionaries
+    # these dicts contain key-value pairs of the form 'file_dir : class'
+    all_files = sorted(list(all_files_dict.keys()))
+    train_files = {all_files[i]: all_files_dict[all_files[i]] for i in train_ids}
+    val_files = {all_files[i]: all_files_dict[all_files[i]] for i in val_ids}
+    test_files = {all_files[i]: all_files_dict[all_files[i]] for i in test_ids}
+
+    return(train_files, val_files, test_files)
+
+
+
+
+
+
 
 
 class custom_dset(Dataset):
@@ -87,42 +150,3 @@ class custom_dset(Dataset):
         label_t = torch.from_numpy(np.array(label))
         
         return (image, label_t)
-
-
-def train_val_test_split_1(dataset, train_split, val_split, test_split):
-    """
-    Split data set into training, validation, and test sets.
-    """
-    
-    # Size of data set
-    N = dataset.__len__()
-    
-    # Size of train set
-    train_size = math.floor(train_split * N)
-    
-    # Size of validation set
-    val_size = math.floor(val_split * N)
-    
-    # List of all data indices
-    indices = list(range(N))
-    
-    # Random selection of indices for train set
-    train_ids = np.random.choice(indices, size=train_size, replace=False)
-    train_ids = list(train_ids)
-    
-    # Deletion of indices used for train set
-    indices = list(set(indices) - set(train_ids))
-    
-    # Random selection of indices for validation set
-    val_ids = np.random.choice(indices, size=val_size, replace=False)
-    val_ids = list(val_ids)
-    
-    # Selecting remaining indices for test set
-    test_ids = list(set(indices) - set(val_ids))
-    
-    # Creating subsets
-    train_data = torch.utils.data.Subset(dataset, train_ids)
-    val_data = torch.utils.data.Subset(dataset, val_ids)
-    test_data = torch.utils.data.Subset(dataset, test_ids)
-    
-    return(train_data, val_data, test_data)
