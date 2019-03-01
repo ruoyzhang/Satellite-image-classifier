@@ -25,5 +25,9 @@ Project planninig notes for AWS assignment
 
 7. Need to write 2 data transforms for the 2 phases: train and val
 
+8. just test, there is clearly a problem with the weighted sampler, might need to write a new function to test out stuff, not sure how much time i will have this weekend to actually fully make this work i don't even know the basic performance of this CNN yet we need to hurry the fuck so won't be staying up late tonight car je dois me reveiller tres tot demain matin lol
+
+9. in the meantime, we can still see what went wrong with the preds
+
 
 
