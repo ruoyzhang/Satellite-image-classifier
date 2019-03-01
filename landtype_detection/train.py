@@ -127,7 +127,10 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 				# feed inputs into the model
 				output = model(inputs)
 
+
 				# calculate the loss and prediction performance statistics
+				if type(output) == tuple:
+					output, _ = output
 				_, preds = torch.max(output.data, 1)
 				loss = loss_fun(output, labels)
 				running_loss += loss
