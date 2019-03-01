@@ -67,6 +67,7 @@ class custom_dset(Dataset):
     def __getitem__(self, idx):
         file_name = self.all_files[idx]
         image = Image.open(file_name)
+        image = image.convert('RGB')
 
         if self.transform:
             image = self.transform(image)
