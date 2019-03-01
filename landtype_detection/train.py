@@ -99,7 +99,6 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 
 		# each epoch will have a training and validation phase
 		for phase in ['val', 'val']:
-		#for phase in ['val', 'val']:
 			if phase == 'train':
 				exp_lr_scheduler.step()
 				# setting model to trainning mode
@@ -121,8 +120,6 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 				if use_cuda:
 					inputs = inputs.cuda()
 					labels = labels.cuda()
-				
-				print(inputs.shape)
 
 				# zero the parameter gradients
 				optim.zero_grad()
