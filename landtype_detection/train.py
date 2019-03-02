@@ -71,6 +71,10 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 	test_prop = 1 - train_prop - val_prop
 	train_data, val_data, test_data = train_val_test_split(data_dir, train_prop, val_prop, test_prop)
 
+	# saving the test data. We save the test data first in case we want to terminate the training early
+	with open('{}.pickle'.format(os.path.join(save_dir, 'test_data')), 'wb') as handle:
+		pickle.dump(test_data, handle, protocol = pickle.HIGHEST_PROTOCOL)
+
 	# set up the datasets
 	dset = {'train': custom_dset(data_files = train_data, transform = 'train'),
 			'val': custom_dset(data_files = val_data, transform = 'val')}
@@ -168,11 +172,6 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 		pickle.dump(loss_record, handle, protocol = pickle.HIGHEST_PROTOCOL)
 	with open('{}.pickle'.format(os.path.join(save_dir, name + '_acc_performances')), 'wb') as handle:
 		pickle.dump(acc_record, handle, protocol = pickle.HIGHEST_PROTOCOL)
-
-	# saving the test data
-	with open('{}.pickle'.format(os.path.join(save_dir, 'test_data')), 'wb') as handle:
-		pickle.dump(test_data, handle, protocol = pickle.HIGHEST_PROTOCOL)
-
 
 	# calculating time elapsed
 	time_elapsed = time.time() - begin
