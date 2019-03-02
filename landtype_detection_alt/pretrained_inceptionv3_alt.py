@@ -43,13 +43,15 @@ class pretrained_inception_v3(nn.Module):
 		num_features = self.model.fc.in_features
 		self.model.fc = nn.Linear(num_features, num_class)
 
-		# unfreeze the params for the classifier layer
-		for param in self.model.fc.parameters():
-			param.requires_grad = True
-
-		# we also choose to unfreeze the weights of the Conv2d_4a_3x3 layer
-		for param in self.model.Conv2d_4a_3x3.parameters():
-			param.requires_grad = True
+		# we choose to unfreeze the weights of parameters following(but not including) the Conv2d_4a_3x3 layer
+		# act as a testing mechanism
+		ct = []
+		# loop through through the layers
+		for name, child in self.model.named_children():
+			if "Conv2d_4a_3x3" in ct:
+				for params in child.parameters():
+					params.requires_grad = True
+			
 
 	def forward(self, inputs):
 		return(self.model(inputs))

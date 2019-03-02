@@ -167,9 +167,6 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 				best_model_wts = model.state_dict()
 				torch.save(model.state_dict(), os.path.join(save_dir, '().pt'.format(name)))
 
-			# released memory from unreferenced variables
-			torch.cuda.empty_cache()
-
 	# saving the record performances
 	with open('{}.pickle'.format(os.path.join(save_dir, name + '_loss_performances')), 'wb') as handle:
 		pickle.dump(loss_record, handle, protocol = pickle.HIGHEST_PROTOCOL)
