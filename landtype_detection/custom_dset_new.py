@@ -79,35 +79,19 @@ def train_val_test_split(data_dir, train_split, val_split, test_split):
 
 
 class custom_dset(Dataset):
-    def __init__(self, data_dir, transform):
+    def __init__(self, data_files, transform):
         """
-        data_dir : path to images folder
+        data_files : one of the outputs of the train_val_test_split function
+                     a dictionary containing keys of image directories and values of their respective classes
         transform : either 'train' or 'val'
                     indicates whether the dataset is for training or validation purposees
         """
 
-        # getting the sub folders and getting rid off irrelevant readings
-        sub_paths = [os.path.join(data_dir, file_dir) for file_dir in os.listdir(data_dir)]
-        sub_paths = [path for path in sub_paths if os.path.isdir(path)]
-
-        # creating a dict to convert string classes into integers that can be converted to tensors
-        class_dict = {'water':0, 'trees':1, 'road':2, 'barren_land': 3, 'building': 4, 'grassland':5}
-
-        # creating a dict for all files stored in the different class specific folders
-        # the dict contains key-value pairs of the form: full_file_dir: class
-        all_files_dict = {}
-        for path in sub_paths:
-            all_files_dict = {**all_files_dict, **{os.path.join(path, file_name):class_dict[os.path.split(path)[1]] for file_name in os.listdir(path)}}
-
-
-        # creating a list of all files and store as a class var
-        self.all_files = sorted(list(all_files_dict.keys()))
-
-        # creating a list of all classes in the order of the all_files class variable
-        self.labels = [all_files_dict[key] for key in self.all_files]
-
         # setting the all_file_dict to a class variable
-        self.dir_to_class_dict = all_files_dict
+        self.dir_to_class_dict = data_files
+
+        # setting all file directories to a class variable
+        self.all_files = sorted(list(data_files.keys()))
 
         # setting the len variable
         self.len = len(self.dir_to_class_dict)
