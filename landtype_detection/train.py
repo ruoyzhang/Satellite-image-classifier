@@ -68,11 +68,11 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 
 	# split the dataset into train, val and test
 	test_prop = 1 - train_prop - val_prop
-	train_data, val_data, test_data = train_val_test_split(dset, train_prop, val_prop, test_prop)
+	train_data, val_data, test_data = train_val_test_split(data_dir, train_prop, val_prop, test_prop)
 
 	# set up the datasets
-	dset = {'train': custom_dset(data_dir = train_data, transform = 'train'),
-			'val': custom_dset(data_dir = val_data, transform = 'val')}
+	dset = {'train': custom_dset(data_files = train_data, transform = 'train'),
+			'val': custom_dset(data_files = val_data, transform = 'val')}
 
 	# setting up a random weighted sampler to ensure the classes are balanced in the training phase
 	# calculating weights for the dset indices according to their respective class
