@@ -7,7 +7,7 @@ from pretrained_inceptionv3_alt import pretrained_inception_v3
 data_dir = '../../data/images/'
 save_dir = '../../data/CNN_model_landtype/'
 num_class = 6
-bs = 12
+bs = 24
 
 
 # run
