@@ -5,9 +5,10 @@ from pretrained_inceptionv3_alt import pretrained_inception_v3
 
 # setting up variables
 data_dir = '../../data/images/'
-save_dir = '../../data/CNN_model_landtype/'
+save_dir = '../../data/CNN_model_landtype_alt/'
 num_class = 6
-bs = 24
+bs = 12
+name = 'model_alt'
 
 
 # run
