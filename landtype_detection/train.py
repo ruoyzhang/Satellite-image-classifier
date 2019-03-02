@@ -169,6 +169,10 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 	with open('{}.pickle'.format(os.path.join(save_dir, name + '_acc_performances')), 'wb') as handle:
 		pickle.dump(acc_record, handle, protocol = pickle.HIGHEST_PROTOCOL)
 
+	# saving the test data
+	with open('{}.pickle'.format(os.path.join(save_dir, 'test_data')), 'wb') as handle:
+		pickle.dump(test_data, handle, protocol = pickle.HIGHEST_PROTOCOL)
+
 
 	# calculating time elapsed
 	time_elapsed = time.time() - begin
