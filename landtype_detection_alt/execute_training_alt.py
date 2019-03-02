@@ -1,6 +1,6 @@
-from train import train
-from custom_dset_new import train_val_test_split, custom_dset
-from pretrained_inceptionv3 import pretrained_inception_v3
+from train_alt import train
+from custom_dset_new_alt import train_val_test_split, custom_dset
+from pretrained_inceptionv3_alt import pretrained_inception_v3
 
 
 # setting up variables
