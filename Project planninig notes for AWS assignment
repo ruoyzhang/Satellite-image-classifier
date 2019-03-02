@@ -29,5 +29,20 @@ Project planninig notes for AWS assignment
 
 9. in the meantime, we can still see what went wrong with the preds
 
+10. Now we're training, it will take a long time to actually go through all the images. If the training does not converge soon and allow me to iterate quickly, then we're screwed, therefore we need to experiement with:
+	a. multiple training with different setups simultaneously
+	b. a non DL method
+
+11. recording epoch wise performance
+	Main Scheme:
+				0		1		2		3		4		5		6		7		8		9		10
+LOSS	train  0.2840
+		val    1.0514 
+ACC		train  0.7436
+		val    0.7809
+
+
+
+
 
 
