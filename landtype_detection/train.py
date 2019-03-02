@@ -159,8 +159,7 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 
 	# calculating time elapsed
 	time_elapsed = time.time() - begin
-	print('Training complete in {:.0F}m {:0F}s'.format(
-		time_elapsed // 60, time_elapsed % 60))
+	print('Training complete in {:.0F}m {:0F}s'.format(time_elapsed // 60, time_elapsed % 60))
 	print('Best validation acc: {:4F}'.format(best_acc))
 
 	# load the best model weights
