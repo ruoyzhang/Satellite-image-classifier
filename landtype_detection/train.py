@@ -100,10 +100,12 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 		# recording the running performance each epoch
 		running_loss = 0.0
 		running_corrects = 0
-		size = 0
 
 		# each epoch will have a training and validation phase
 		for phase in ['train', 'val']:
+			# recording the dataset size
+			size = 0
+
 			if phase == 'train':
 				exp_lr_scheduler.step()
 				# setting model to trainning mode
@@ -140,7 +142,9 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 				if phase == 'train':
 					loss.backward()
 					optim.step()
-					size += batch_count
+				
+				# update dataset size
+				size += batch_count
 
 			epoch_loss = running_loss / size
 			epoch_acc = running_corrects.item() / size
