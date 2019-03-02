@@ -4,7 +4,7 @@ from pretrained_inceptionv3 import pretrained_inception_v3
 
 
 # setting up variables
-data_dir = '../../data/test_images/'
+data_dir = '../../data/images/'
 save_dir = '../../data/CNN_model_landtype/'
 num_class = 6
 bs = 6
