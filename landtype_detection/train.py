@@ -149,7 +149,7 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 			loss_record[phase][epoch] = epoch_loss
 			acc_record[phase][epoch] = epoch_acc
 
-			print('{} loss: {:.4F} Acc: {:.4F}').format(phase, epoch_loss, epoch_acc)
+			print('{} loss: {:.4F} Acc: {:.4F}'.format(phase, epoch_loss, epoch_acc))
 
 			# deep copy and save the model if best performance
 			if phase == 'val' and epoch_acc > best_acc:
