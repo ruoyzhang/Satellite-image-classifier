@@ -66,27 +66,27 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 	# we apply learning rate decay
 	exp_lr_scheduler = lr_scheduler.StepLR(optim, step_size = 7, gamma = 0.1)
 
-
-	# set up the dataset
-	dset = custom_dset(data_dir = data_dir)
-
 	# split the dataset into train, val and test
 	test_prop = 1 - train_prop - val_prop
 	train_data, val_data, test_data = train_val_test_split(dset, train_prop, val_prop, test_prop)
 
+	# set up the datasets
+	dset = {'train': custom_dset(data_dir = train_data, transform = 'train'),
+			'val': custom_dset(data_dir = val_data, transform = 'val')}
+
 	# setting up a random weighted sampler to ensure the classes are balanced in the training phase
 	# calculating weights for the dset indices according to their respective class
-	train_class_sample_count = Counter(dset.dir_to_class_dict[dset.all_files[i]] for i in train_data.indices)
+	train_class_sample_count = Counter(dset['train'].labels)
 	sorted_train_class_sample_count = [train_class_sample_count[key] for key in sorted(train_class_sample_count.keys())]
 	weights = 100000./torch.tensor(sorted_train_class_sample_count, dtype = torch.float)
-	samples_weights = [weights[label] for label in train_data.dataset.labels]
+	samples_weights = [weights[label] for label in dset['train'].labels]
 	# the sampler
 	sampler = WeightedRandomSampler(weights=samples_weights,
 									num_samples=len(samples_weights),
 									replacement=True)
 	# the dataloaders, we create 2 dataloaders for the train and val phase seperately
-	dataloaders = {'train': DataLoader(train_data, batch_size = bs, sampler = sampler, num_workers = num_workers, pin_memory = False),
-					'val': DataLoader(val_data, batch_size = bs, shuffle = True, num_workers = num_workers, pin_memory = False)}
+	dataloaders = {'train': DataLoader(dset['train'], batch_size = bs, sampler = sampler, num_workers = num_workers, pin_memory = False),
+					'val': DataLoader(dset['val'], batch_size = bs, shuffle = True, num_workers = num_workers, pin_memory = False)}
 
 	# create variables for storing best performing weights during training
 	best_model_wts = model.state_dict()
