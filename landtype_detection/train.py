@@ -15,7 +15,7 @@ from torch.utils.data import WeightedRandomSampler
 from collections import Counter
 import time
 from pretrained_inceptionv3 import pretrained_inception_v3
-from custom_dset import custom_dset, train_val_test_split
+from custom_dset_new import custom_dset, train_val_test_split
 
 
 def train(data_dir, save_dir, num_class, num_epoch = 20,\
