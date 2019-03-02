@@ -16,6 +16,7 @@ from collections import Counter
 import time
 from pretrained_inceptionv3 import pretrained_inception_v3
 from custom_dset_new import custom_dset, train_val_test_split
+import pickle
 
 
 def train(data_dir, save_dir, num_class, num_epoch = 20,\
@@ -101,7 +102,7 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 
 		# each epoch will have a training and validation phase
 		for phase in ['train', 'val']:
-			
+
 			# recording the dataset size
 			running_loss = 0.0
 			running_corrects = 0
@@ -161,6 +162,13 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 				best_acc = epoch_acc
 				best_model_wts = model.state_dict()
 				torch.save(model.state_dict(), os.path.join(save_dir, '().pt'.format(name)))
+
+	# saving the record performances
+	with open('{}.pickle'.format(os.path.join(save_dir, name + '_loss_performances')), 'wb') as handle:
+		pickle.dump(loss_record, handle, protocol = pickle.HIGHEST_PROTOCOL)
+	with open('{}.pickle'.format(os.path.join(save_dir, name + '_acc_performances')), 'wb') as handle:
+		pickle.dump(acc_record, handle, protocol = pickle.HIGHEST_PROTOCOL)
+
 
 	# calculating time elapsed
 	time_elapsed = time.time() - begin
