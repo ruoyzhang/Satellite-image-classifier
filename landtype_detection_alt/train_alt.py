@@ -14,8 +14,9 @@ import math
 from torch.utils.data import WeightedRandomSampler
 from collections import Counter
 import time
-from pretrained_inceptionv3 import pretrained_inception_v3
-from custom_dset_new import custom_dset, train_val_test_split
+from pretrained_inceptionv3_alt import pretrained_inception_v3
+from custom_dset_new_alt import custom_dset, train_val_test_split
+import pickle
 
 
 def train(data_dir, save_dir, num_class, num_epoch = 20,\
@@ -97,8 +98,16 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 		print('Epoch {}/{}'.format(epoch, num_epoch - 1))
 		print('-' * 10)
 
+		# recording the running performance each epoch
+
 		# each epoch will have a training and validation phase
 		for phase in ['train', 'val']:
+
+			# recording the dataset size
+			running_loss = 0.0
+			running_corrects = 0
+			size = 0
+
 			if phase == 'train':
 				exp_lr_scheduler.step()
 				# setting model to trainning mode
@@ -106,11 +115,6 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 			else:
 				# setting model to validation mode
 				model.eval()
-
-			# recording the running performance each epoch
-			running_loss = 0.0
-			running_corrects = 0
-			size = 0
 
 			# now we iterate over the data
 			for inputs, labels in tqdm(dataloaders[phase]):
@@ -140,7 +144,9 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 				if phase == 'train':
 					loss.backward()
 					optim.step()
-					size += batch_count
+				
+				# update dataset size
+				size += batch_count
 
 			epoch_loss = running_loss / size
 			epoch_acc = running_corrects.item() / size
@@ -155,7 +161,18 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 			if phase == 'val' and epoch_acc > best_acc:
 				best_acc = epoch_acc
 				best_model_wts = model.state_dict()
-				torch.save(model.state_dict(). os.path.join(save_dir, '().pt'.format(name)))
+				torch.save(model.state_dict(), os.path.join(save_dir, '().pt'.format(name)))
+
+	# saving the record performances
+	with open('{}.pickle'.format(os.path.join(save_dir, name + '_loss_performances')), 'wb') as handle:
+		pickle.dump(loss_record, handle, protocol = pickle.HIGHEST_PROTOCOL)
+	with open('{}.pickle'.format(os.path.join(save_dir, name + '_acc_performances')), 'wb') as handle:
+		pickle.dump(acc_record, handle, protocol = pickle.HIGHEST_PROTOCOL)
+
+	# saving the test data
+	with open('{}.pickle'.format(os.path.join(save_dir, 'test_data')), 'wb') as handle:
+		pickle.dump(test_data, handle, protocol = pickle.HIGHEST_PROTOCOL)
+
 
 	# calculating time elapsed
 	time_elapsed = time.time() - begin

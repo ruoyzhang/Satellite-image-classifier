@@ -1,13 +1,14 @@
-from train import train
-from custom_dset_new import train_val_test_split, custom_dset
-from pretrained_inceptionv3 import pretrained_inception_v3
+from train_alt import train
+from custom_dset_new_alt import train_val_test_split, custom_dset
+from pretrained_inceptionv3_alt import pretrained_inception_v3
 
 
 # setting up variables
 data_dir = '../../data/images/'
-save_dir = '../../data/CNN_model_landtype/'
+save_dir = '../../data/CNN_model_landtype_alt/'
 num_class = 6
-bs = 12
+bs = 4
+name = 'model_alt'
 
 
 # run

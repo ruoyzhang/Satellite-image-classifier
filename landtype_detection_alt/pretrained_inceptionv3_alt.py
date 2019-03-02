@@ -47,6 +47,10 @@ class pretrained_inception_v3(nn.Module):
 		for param in self.model.fc.parameters():
 			param.requires_grad = True
 
+		# we also choose to unfreeze the weights of the Conv2d_4a_3x3 layer
+		for param in self.model.Conv2d_4a_3x3.parameters():
+			param.requires_grad = True
+
 	def forward(self, inputs):
 		return(self.model(inputs))
 
