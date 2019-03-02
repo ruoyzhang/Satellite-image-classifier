@@ -97,6 +97,11 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 		print('Epoch {}/{}'.format(epoch, num_epoch - 1))
 		print('-' * 10)
 
+		# recording the running performance each epoch
+		running_loss = 0.0
+		running_corrects = 0
+		size = 0
+
 		# each epoch will have a training and validation phase
 		for phase in ['train', 'val']:
 			if phase == 'train':
@@ -106,11 +111,6 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 			else:
 				# setting model to validation mode
 				model.eval()
-
-			# recording the running performance each epoch
-			running_loss = 0.0
-			running_corrects = 0
-			size = 0
 
 			# now we iterate over the data
 			for inputs, labels in tqdm(dataloaders[phase]):
