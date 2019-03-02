@@ -114,7 +114,7 @@ class custom_dset(Dataset):
                 ])
         elif transform == 'val':
             transform = transforms.Compose([
-                transforms.Resize(299),,
+                transforms.Resize(299),
                 transforms.ToTensor(),
                 normalize,
                 ])
