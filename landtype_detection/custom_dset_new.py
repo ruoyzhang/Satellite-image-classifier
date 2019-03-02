@@ -114,9 +114,10 @@ class custom_dset(Dataset):
                 ])
         elif transform == 'val':
             transform = transforms.Compose([
-                transforms.Resize(299),
-                transforms.CenterCrop(299),
-                transforms.ToTensor()])
+                transforms.Resize(299),,
+                transforms.ToTensor(),
+                normalize,
+                ])
         self.transform = transform
 
     # the __len__ method
