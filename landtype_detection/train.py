@@ -155,7 +155,7 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 			if phase == 'val' and epoch_acc > best_acc:
 				best_acc = epoch_acc
 				best_model_wts = model.state_dict()
-				torch.save(model.state_dict(). os.path.join(save_dir, '().pt'.format(name)))
+				torch.save(model.state_dict(), os.path.join(save_dir, '().pt'.format(name)))
 
 	# calculating time elapsed
 	time_elapsed = time.time() - begin
