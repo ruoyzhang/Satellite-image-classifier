@@ -37,7 +37,7 @@ def train_val_test_split(data_dir, train_split, val_split, test_split):
 
     # now sample according to the proportions
     # Size of data set
-    N = dataset.__len__()
+    N = len(all_files_dict)
     
     # Size of train set
     train_size = math.floor(train_split * N)
