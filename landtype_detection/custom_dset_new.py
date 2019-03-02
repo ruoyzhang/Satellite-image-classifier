@@ -93,6 +93,9 @@ class custom_dset(Dataset):
         # setting all file directories to a class variable
         self.all_files = sorted(list(data_files.keys()))
 
+        # creating a list of all classes in the order of the all_files class variable
+        self.labels = [data_files[key] for key in self.all_files]
+
         # setting the len variable
         self.len = len(self.dir_to_class_dict)
         
