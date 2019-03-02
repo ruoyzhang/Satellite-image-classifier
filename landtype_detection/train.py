@@ -116,7 +116,6 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 			for inputs, labels in tqdm(dataloaders[phase]):
 				# counting how many images is contained in this batch
 				batch_count = labels.size(0)
-				print('batch count is :', batch_count)
 				# if GPU is used, cudafy inputs
 				if use_cuda:
 					inputs = inputs.cuda()
