@@ -5,6 +5,7 @@ from skimage import util
 from math import floor
 import cv2
 from tqdm import tqdm
+import numpy as np
 
 
 def random_rotation_25(image_array: ndarray):
@@ -19,7 +20,7 @@ def random_rotation_75(image_array: ndarray):
 
 def random_rotation_90(image_array: ndarray):
     # randomly rotate image of 90 degrees either to the left or to the right
-    random_degree = random.choice(-90, 90)
+    random_degree = random.choice([-90, 90])
     return(sk.transform.rotate(image_array, random_degree))
 
 def random_noise(image_array: ndarray):
@@ -65,13 +66,13 @@ def image_augmentation(image_dirs, fold):
 	# establish all the functions to use for augmentation
 	function_list = [random_rotation_25, random_rotation_75, random_rotation_90, random_noise, horizontal_flip, vertical_flip, transpose, zoom]
 
-	# print augmentation functions to use
-	print('the functions to be used for augmentation are: ')
-	for fun in function_list:
-		print(str(fun).split(' ')[1])
-
 	# randomly choose which augmentations to use:
 	augmentations_to_use = random.sample(function_list, fold)
+
+	# print augmentation functions to use
+	print('the functions to be used for augmentation are: ')
+	for i, fun in enumerate(augmentations_to_use):
+		print(i+1, str(fun).split(' ')[1])
 
 	# create a list to store results
 	augmented = []
@@ -85,17 +86,14 @@ def image_augmentation(image_dirs, fold):
 
 		# augment the image
 		for aug in augmentations_to_use:
-			aug_img = aug(rgb_img)
+			aug_img = np.array(aug(rgb_img))
 			aug_img.shape = (1, 3*28*28)
 			augmented.append(aug_img)
 
 	# convert to a nparray
-	aug_img = np.array(aug_img)
+	augmented = np.concatenate(augmented, axis = 0)
 
-	# reshape the array
-	aug_img.shape = (aug_img.shape[0], aug_img.shape[2])
-
-	return(aug_img)
+	return(augmented)
 
 
 
