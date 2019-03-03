@@ -10,7 +10,8 @@ num_class = 6
 bs = 8
 name = 'model_alt'
 num_epoch = 8
+lr = 3e-4
 
 
 # run
-loss_record, acc_record, model, test_data = train(data_dir = data_dir, save_dir = save_dir, num_class = 6, num_epoch = num_epoch, bs = bs, use_cuda = True)
+loss_record, acc_record, model, test_data = train(data_dir = data_dir, save_dir = save_dir, num_class = 6, lr = lr, num_epoch = num_epoch, bs = bs, use_cuda = True)
