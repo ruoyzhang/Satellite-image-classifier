@@ -105,12 +105,10 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 		print('Epoch {}/{}'.format(epoch, num_epoch - 1))
 		print('-' * 10)
 
-		# recording the running performance each epoch
-
 		# each epoch will have a training and validation phase
 		for phase in ['train', 'val']:
 
-			# recording the dataset size
+			# recording the running performance and the dataset size
 			running_loss = 0.0
 			running_corrects = 0
 			size = 0
