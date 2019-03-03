@@ -21,7 +21,8 @@ import pickle
 
 def train(data_dir, save_dir, num_class, num_epoch = 20,\
 	bs = 4, lr = 1e-3, use_cuda = False, num_workers = 1,\
-	name = 'model', train_prop = 0.7, val_prop = 0.2):
+	name = 'model', train_prop = 0.7, val_prop = 0.2,
+	step_size = 4, gamma = 0.1):
 	"""
 	params:
 	data_dir: where the image folder is stored
@@ -36,6 +37,8 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 	name (optional, 'model' by default): name of the model when it is saved
 	train_prop(optional, 0.7 by default): the propotion of the data used for trainning
 	val_prop(optional, 0.2 by default): the propotion of the data used for validation
+	step_size (4 by default): the frequency for learning rate decay
+	gamma (0.1 by default): the factor by which the learning rate decays
 	"""
 
 	# checkpoint beginning time
@@ -65,7 +68,7 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 	# we use stochastic gradient descend for optimisation
 	optim = SGD(model.parameters(), lr = lr, momentum = 0.9)
 	# we apply learning rate decay
-	exp_lr_scheduler = lr_scheduler.StepLR(optim, step_size = 4, gamma = 0.2)
+	exp_lr_scheduler = lr_scheduler.StepLR(optim, step_size = step_size, gamma = gamma)
 
 	# split the dataset into train, val and test
 	test_prop = 1 - train_prop - val_prop

@@ -7,11 +7,15 @@ from pretrained_inceptionv3_alt import pretrained_inception_v3
 data_dir = '../../data/images/'
 save_dir = '../../data/CNN_model_landtype_alt/'
 num_class = 6
-bs = 8
+bs = 16
 name = 'model_alt'
 num_epoch = 8
-lr = 3e-4
+lr = 5e-5
+step_size = 3
+gamma = 0.2
 
 
 # run
-loss_record, acc_record, model, test_data = train(data_dir = data_dir, save_dir = save_dir, num_class = 6, lr = lr, num_epoch = num_epoch, bs = bs, use_cuda = True)
+loss_record, acc_record, model, test_data = train(data_dir = data_dir, save_dir = save_dir, num_class = 6, 
+												num_epoch = num_epoch, bs = bs, lr = lr, step_size = step_size, 
+												gamma = gamma, use_cuda = True)
