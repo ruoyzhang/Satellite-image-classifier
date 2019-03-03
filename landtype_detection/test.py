@@ -48,6 +48,8 @@ def test(model, test_files, bs):
 	for inputs, labels in tqdm(dataloader):
 		# counting how many images is contained in this batch
 		batch_count = labels.size(0)
+		# Forward pass
+		outputs = model(inputs)
 
 		# calculate the loss and prediction performance statistics
 		if type(output) == tuple:
@@ -61,8 +63,8 @@ def test(model, test_files, bs):
 		# update dataset size
 		size += batch_count
 
-		# compute the model's performance
-		model_loss = running_loss / size
-		model_acc = running_corrects / size
+	# compute the model's performance
+	model_loss = running_loss / size
+	model_acc = running_corrects / size
 
-		return(model_loss, model_acc)
+	return(model_loss, model_acc)

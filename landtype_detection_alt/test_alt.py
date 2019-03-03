@@ -30,6 +30,10 @@ def test(model, test_files, bs):
 	# set model to eval mode
 	model.eval()
 
+	# cudafy model if specified
+	if use_cuda:
+		model = model.cuda()
+
 	# recording the running performance and the dataset size
 	running_loss = 0.0
 	running_corrects = 0
@@ -46,8 +50,14 @@ def test(model, test_files, bs):
 
 	# now iterate over the images to make predictions
 	for inputs, labels in tqdm(dataloader):
+		# cudafy if specified
+		if use_cuda:
+			inputs = inputs.cuda()
+			labels = labels.cuda()
 		# counting how many images is contained in this batch
 		batch_count = labels.size(0)
+		# Forward pass
+		output = model(inputs)
 
 		# calculate the loss and prediction performance statistics
 		if type(output) == tuple:
@@ -61,8 +71,8 @@ def test(model, test_files, bs):
 		# update dataset size
 		size += batch_count
 
-		# compute the model's performance
-		model_loss = running_loss / size
-		model_acc = running_corrects / size
+	# compute the model's performance
+	model_loss = running_loss / size
+	model_acc = running_corrects / size
 
-		return(model_loss, model_acc)
+	return(model_loss, model_acc)
