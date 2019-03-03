@@ -10,8 +10,8 @@ num_class = 6
 bs = 16
 name = 'model_alt'
 num_epoch = 8
-lr = 5e-5
-step_size = 3
+lr = 1e-5
+step_size = 4
 gamma = 0.2
 
 

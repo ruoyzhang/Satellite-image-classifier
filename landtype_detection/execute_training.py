@@ -9,7 +9,7 @@ save_dir = '../../data/CNN_model_landtype/'
 num_class = 6
 bs = 16
 num_epoch = 8
-lr = 1e-4
+lr = 1e-5
 step_size = 4
 gamma = 0.2
 
