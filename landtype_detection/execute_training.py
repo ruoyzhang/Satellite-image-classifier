@@ -8,7 +8,7 @@ data_dir = '../../data/images/'
 save_dir = '../../data/CNN_model_landtype/'
 num_class = 6
 bs = 6
-num_epoch = 12
+num_epoch = 8
 lr = 3e-4
 
 
