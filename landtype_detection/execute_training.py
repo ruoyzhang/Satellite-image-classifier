@@ -8,7 +8,9 @@ data_dir = '../../data/images/'
 save_dir = '../../data/CNN_model_landtype/'
 num_class = 6
 bs = 6
+num_epoch = 12
+
 
 
 # run
-loss_record, acc_record, model, test_data = train(data_dir = data_dir, save_dir = save_dir, num_class = 6, bs = bs, use_cuda = True)
+loss_record, acc_record, model, test_data = train(data_dir = data_dir, save_dir = save_dir, num_class = 6, num_epoch = num_epoch, bs = bs, use_cuda = True)

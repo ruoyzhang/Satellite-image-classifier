@@ -65,7 +65,7 @@ def train(data_dir, save_dir, num_class, num_epoch = 20,\
 	# we use stochastic gradient descend for optimisation
 	optim = SGD(model.parameters(), lr = lr, momentum = 0.9)
 	# we apply learning rate decay
-	exp_lr_scheduler = lr_scheduler.StepLR(optim, step_size = 4, gamma = 0.1)
+	exp_lr_scheduler = lr_scheduler.StepLR(optim, step_size = 3, gamma = 0.1)
 
 	# split the dataset into train, val and test
 	test_prop = 1 - train_prop - val_prop
