@@ -14,8 +14,8 @@ import math
 from torch.utils.data import WeightedRandomSampler
 from collections import Counter
 import time
-from pretrained_inceptionv3 import pretrained_inception_v3
-from custom_dset_new import custom_dset, train_val_test_split
+from pretrained_inceptionv3_alt import pretrained_inception_v3
+from custom_dset_new_alt import custom_dset, train_val_test_split
 import pickle
 
 
