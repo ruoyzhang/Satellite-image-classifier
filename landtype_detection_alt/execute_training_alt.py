@@ -7,7 +7,7 @@ from pretrained_inceptionv3_alt import pretrained_inception_v3
 data_dir = '../../data/images/'
 save_dir = '../../data/CNN_model_landtype_alt/'
 num_class = 6
-bs = 16
+bs = 32
 name = 'model_alt'
 num_epoch = 8
 lr = 1e-5

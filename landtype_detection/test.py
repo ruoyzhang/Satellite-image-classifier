@@ -19,16 +19,20 @@ from custom_dset_new import custom_dset, train_val_test_split
 import pickle
 
 
-def test(model, test_files, bs):
+def test(model, test_files, bs, use_cuda = False):
 	"""
 	model : the model to be tested
 	test_files : the directories to the test images, output of the train_val_test_split function
 	bs : batch size
-
+	use_cuda : whether to use the GPU for calculations
 	"""
 
 	# set model to eval mode
 	model.eval()
+
+	# cudafy model if specified
+	if use_cuda:
+		model = model.cuda()
 
 	# recording the running performance and the dataset size
 	running_loss = 0.0
@@ -46,10 +50,15 @@ def test(model, test_files, bs):
 
 	# now iterate over the images to make predictions
 	for inputs, labels in tqdm(dataloader):
+		# cudafy if specified
+		if use_cuda:
+			inputs = inputs.cuda()
+			labels = labels.cuda()
+
 		# counting how many images is contained in this batch
 		batch_count = labels.size(0)
 		# Forward pass
-		outputs = model(inputs)
+		output = model(inputs)
 
 		# calculate the loss and prediction performance statistics
 		if type(output) == tuple:

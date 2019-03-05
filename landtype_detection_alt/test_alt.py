@@ -50,7 +50,7 @@ def test(model, test_files, bs):
 
 	# now iterate over the images to make predictions
 	for inputs, labels in tqdm(dataloader):
-		# cudafy if specified
+		# cudafy inputs and labels if specified
 		if use_cuda:
 			inputs = inputs.cuda()
 			labels = labels.cuda()
